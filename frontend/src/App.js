@@ -11,6 +11,7 @@ import Admin from "./Pages/AdminPage/Admin";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/SignUp/Signup";
 import YourMainComponent from "./Pages/Payment/Payment";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -38,7 +39,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-         
+        <Route path="/navbar" element={<Navbar />} />
 
           <Route element={<ProtectedRoutes />}>
             <Route path="/" element={<Home />} />

@@ -39,6 +39,10 @@ const Signup = () => {
           errors.phonenumber = "Phone Number is required";
           hasError = true;
         }
+        else if (users.phonenumber.length < 7) {
+          errors.phonenumber = "PhoneNumber must include 11 characters ";
+          hasError = true;
+        }
         if (!users.address) {
           errors.address = "Address is required";
           hasError = true;
@@ -51,8 +55,26 @@ const Signup = () => {
           errors.username = "Username is required";
           hasError = true;
         }
+        else if (users.username.length < 7) {
+          errors.username = "Username must be at least 7 characters long";
+          hasError = true;
+        }
         if (!users.password) {
           errors.password = "Password is required";
+          hasError = true;
+        }
+        else if (users.password.length < 7) {
+          errors.password = "Password must be at least 7 characters long";
+          hasError = true;
+        }
+        else if (!/[A-Z]/.test(users.password)) {
+          errors.password = "Password must contain at least one capital letter";
+          hasError = true;
+        } else if (!/[0-9]/.test(users.password)) {
+          errors.password = "Password must contain at least one number";
+          hasError = true;
+        } else if (!/[^A-Za-z0-9]/.test(users.password)) {
+          errors.password = "Password must contain at least one special character";
           hasError = true;
         }
         if (hasError) {

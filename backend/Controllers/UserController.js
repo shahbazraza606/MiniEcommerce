@@ -2,49 +2,44 @@ const User = require("../Models/UserModel");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
   const { name, email, phonenumber, address, gender, username, password, type } = req.body;
   console.log(req.body);
-  User.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        return res.status(400).json({ error: "Email is already registered" });
-      }
 
-      const newUser = new User({
-        name,
-        email,
-        phonenumber,
-        address,
-        gender,
-        username,
-        password,
-        type,
-      });
+  try {
+    const user = await User.findOne({ email: email });
 
-      newUser
-        .save()
-        .then((savedUser) => {
-          welcomeemail(savedUser.email);
+    if (user) {
+      return res.status(400).json({ error: "Email is already registered" });
+    }
 
-          const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
-          return res.status(201).json({
-            success: true,
-            token,
-            user: savedUser,
-          });
-        })
-        .catch((error) => {
-          return res.status(500).json({ error: error });
-        });
-    })
-    .catch((error) => {
-      return res.status(500).json({ error: error });
+    const newUser = new User({
+      name,
+      email,
+      phonenumber,
+      address,
+      gender,
+      username,
+      password,
+      type,
     });
+
+    const savedUser = await newUser.save();
+
+    welcomeemail(savedUser.email);
+
+    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
+
+    return res.status(201).json({
+      success: true,
+      token,
+      user: savedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };
-
- 
-
 
 
 function welcomeemail(email){

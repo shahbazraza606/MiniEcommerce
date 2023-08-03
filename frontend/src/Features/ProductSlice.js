@@ -25,8 +25,8 @@ export const createProduct = createAsyncThunk(
       token: token,
     };
 
-    console.log("Token Slice", token);
-    // console.log(products);
+
+    
     try {
       console.log("My Image", products.image);
       const response = axios
@@ -34,10 +34,10 @@ export const createProduct = createAsyncThunk(
         .then((response) => {
           console.log(response);
           if (response.data.success) {
-            alert(response.data);
+            alert("Product Added Successfully");
             window.location.reload();
           } else {
-            alert(response.data.message);
+            alert("Error in Adding Product");
           }
         });
       return response.data;

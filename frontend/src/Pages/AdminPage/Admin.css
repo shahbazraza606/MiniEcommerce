@@ -32,7 +32,13 @@
   
 }
 .glowing-btn {
-    margin-top: 20px;
+  /* display: flex;
+  flex-direction: column;
+ margin-left: 550px;
+    margin-top: 20px; */
+    /* width: 30%;
+    text-align: center;
+    align-items: center; */
   position: relative;
   color: var(--glow-color);
   cursor: pointer;

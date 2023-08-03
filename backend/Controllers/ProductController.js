@@ -35,7 +35,7 @@ exports.getProduct = (req, res) => {
   Product.find()
     .sort({ name: 1 })
     .then((product) => {
-        console.log(product);
+       console.log("Products Displayed")
       res
         .status(200)
         .json({ message: "Here is the Product info", product: product });

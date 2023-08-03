@@ -17,10 +17,11 @@ const initialState = {
         try{
             const response = await axios.post("http://localhost:4000/user/register", users);
            alert("User Created Successfully")
-      
+          window.location.href = "/login";
             return response.data;
         }
             catch(error){
+alert("User Email Already Exists")
                 return rejectWithValue(error.response.data);
             }
     }

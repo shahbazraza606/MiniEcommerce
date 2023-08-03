@@ -26,6 +26,7 @@ const Cards = ({ image, name, description, quantity, price, type, idProduct, pro
   };
   const handleAddToCart = () => {
     dispatch(addToCart(producto));
+    
   };
 
   return (
